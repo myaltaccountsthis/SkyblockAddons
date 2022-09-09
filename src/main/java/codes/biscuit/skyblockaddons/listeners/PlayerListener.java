@@ -1064,7 +1064,12 @@ public class PlayerListener {
             DevUtils.copyData();
         } else if ((rotate = (main.getRotateKey(true).isPressed() ? 1 : 0) - (main.getRotateKey(false).isPressed() ? 1 : 0)) != 0) {
             EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-            player.rotationYaw += rotate * 45.0f;
+            float rotation = player.rotationYaw / 45f + rotate;
+            if (rotate > 0)
+                rotation = MathHelper.floor_float(rotation) * 45f;
+            else
+                rotation = MathHelper.ceiling_float_int(rotation) * 45f;
+            player.rotationYaw = rotation;
         }
 
         if (main.getConfigValues().isEnabled(Feature.DUNGEONS_MAP_DISPLAY) &&

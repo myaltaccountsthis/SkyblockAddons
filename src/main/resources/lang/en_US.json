@@ -222,7 +222,10 @@
     "changeDungeonMapZoomWithKeyboard": "Adjust zoom with +/- keys",
     "showPlayerSymbolsInChat": "Show Player Symbols In Chat",
     "crimsonArmorAbilityStacks": "Show Crimson Armor Stacks",
-    "hideTrueDefense": "Hide True Defense"
+    "hideTrueDefense": "Hide True Defense",
+
+    "crystalHollowsChest": "Crystal Hollows Chest Solver",
+    "crystalHollowsChestDebug": "Debug Mode"
   },
   "messages": {
     "enchants": "Enchants",
@@ -645,7 +648,8 @@
     "increaseDungeonMapZoom": "Dungeon Map Zoom In",
     "decreaseDungeonMapZoom": "Dungeon Map Zoom Out",
     "rotateLeft": "Rotate Left",
-    "rotateRight": "Rotate Right"
+    "rotateRight": "Rotate Right",
+    "toggleChest": "Toggle Chest Solver"
   },
   "dragonTracker": {
     "protector": "Protector",

@@ -220,6 +220,8 @@ public class EnumUtils {
         RESET_SALVAGED_ESSENCES_AFTER_LEAVING_MENU("settings.resetSalvagedEssencesAfterLeavingMenu", 214),
         CHANGE_DUNGEON_MAP_ZOOM_WITH_KEYBOARD("settings.changeDungeonMapZoomWithKeyboard", 215),
 
+        CRYSTAL_HOLLOWS_CHEST_DEBUG("settings.crystalHollowsChestDebug", 1008),
+
         DISCORD_RP_STATE(0),
         DISCORD_RP_DETAILS(0),
         ;

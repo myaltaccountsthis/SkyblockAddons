@@ -176,7 +176,8 @@ public class SkyblockAddons {
                 new SkyblockKeyBinding("copy_NBT", developerModeKey, "keyBindings.developerCopyNBT"));
         registerKeyBindings(keyBindings);
         Collections.addAll(customKeyBindings, new SkyblockKeyBinding("rotate_left", Keyboard.KEY_NONE, "keyBindings.rotateLeft"),
-                new SkyblockKeyBinding("rotate_right", Keyboard.KEY_NONE, "keyBindings.rotateRight"));
+                new SkyblockKeyBinding("rotate_right", Keyboard.KEY_NONE, "keyBindings.rotateRight"),
+                new SkyblockKeyBinding("toggle_chest", Keyboard.KEY_GRAVE, "keyBindings.toggleChest"));
         registerKeyBindings(customKeyBindings);
 
         setKeyBindingDescriptions();
@@ -248,6 +249,10 @@ public class SkyblockAddons {
 
     public KeyBinding getRotateKey(boolean right) {
         return customKeyBindings.get(right ? 1 : 0).getKeyBinding();
+    }
+
+    public KeyBinding getToggleChestKey() {
+        return customKeyBindings.get(2).getKeyBinding();
     }
 
     /**

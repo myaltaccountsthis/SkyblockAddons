@@ -217,6 +217,9 @@ public enum Feature {
     CRIMSON_ARMOR_ABILITY_STACKS(217, "settings.crimsonArmorAbilityStacks", new GuiFeatureData(EnumUtils.DrawType.TEXT, ColorCode.GOLD), false),
     HIDE_TRUE_DEFENSE(218, "settings.hideTrueDefense", new GuiFeatureData(ColorCode.RED), false),
 
+    CRYSTAL_HOLLOWS_CHEST(1007, "settings.crystalHollowsChest", null, true, EnumUtils.FeatureSetting.CRYSTAL_HOLLOWS_CHEST_DEBUG),
+    CRYSTAL_HOLLOWS_CHEST_DEBUG(1008, "settings.crystalHollowsChestDebug", true),
+
     WARNING_TIME(-1, "settings.warningDuration", null, false),
     WARP_ADVANCED_MODE(-1, "settings.advancedMode", null, true),
     ADD(-1, null, false),

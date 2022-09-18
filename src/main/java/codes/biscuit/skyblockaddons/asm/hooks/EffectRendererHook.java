@@ -3,12 +3,14 @@ package codes.biscuit.skyblockaddons.asm.hooks;
 import codes.biscuit.skyblockaddons.SkyblockAddons;
 import codes.biscuit.skyblockaddons.core.Feature;
 import codes.biscuit.skyblockaddons.core.OverlayEffectRenderer;
+import codes.biscuit.skyblockaddons.features.CrystalHollowsChestManager;
 import codes.biscuit.skyblockaddons.features.fishParticles.FishParticleManager;
 import codes.biscuit.skyblockaddons.features.healingcircle.HealingCircleManager;
 import codes.biscuit.skyblockaddons.features.healingcircle.HealingCircleParticle;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityAuraFX;
+import net.minecraft.client.particle.EntityCrit2FX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityFishWakeFX;
 import net.minecraft.client.renderer.ActiveRenderInfo;
@@ -39,6 +41,9 @@ public class EffectRendererHook {
             }
             else if (player != null && player.fishEntity != null && main.getConfigValues().isEnabled(Feature.FISHING_PARTICLE_OVERLAY) && entity instanceof EntityFishWakeFX) {
                 FishParticleManager.onFishWakeSpawn((EntityFishWakeFX) entity);
+            }
+            else if (player != null && main.getConfigValues().isEnabled(Feature.CRYSTAL_HOLLOWS_CHEST) && entity instanceof EntityCrit2FX && CrystalHollowsChestManager.isEnabled()) {
+                CrystalHollowsChestManager.onCritParticle((EntityCrit2FX) entity);
             }
         }
     }

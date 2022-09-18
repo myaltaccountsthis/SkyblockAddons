@@ -156,6 +156,9 @@ public class RenderListener {
                         getAttribute(Attribute.HEALTH) : Math.round(getAttribute(Attribute.MAX_HEALTH) * ((p.getHealth()) / p.getMaxHealth()));
                 main.getUtils().getAttributes().get(Attribute.HEALTH).setValue(newHealth);
             }
+            if (p != null && e.type == RenderGameOverlayEvent.ElementType.ALL) {
+                CrystalHollowsChestManager.updateRotation();
+            }
         }
 
         if ((!main.isUsingLabymod() || Minecraft.getMinecraft().ingameGUI instanceof GuiIngameForge)) {

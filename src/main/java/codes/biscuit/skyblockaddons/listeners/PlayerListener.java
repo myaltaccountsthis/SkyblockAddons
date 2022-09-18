@@ -10,10 +10,7 @@ import codes.biscuit.skyblockaddons.core.seacreatures.SeaCreatureManager;
 import codes.biscuit.skyblockaddons.events.DungeonPlayerReviveEvent;
 import codes.biscuit.skyblockaddons.events.SkyblockBlockBreakEvent;
 import codes.biscuit.skyblockaddons.events.SkyblockPlayerDeathEvent;
-import codes.biscuit.skyblockaddons.features.BaitManager;
-import codes.biscuit.skyblockaddons.features.EndstoneProtectorManager;
-import codes.biscuit.skyblockaddons.features.FetchurManager;
-import codes.biscuit.skyblockaddons.features.JerryPresent;
+import codes.biscuit.skyblockaddons.features.*;
 import codes.biscuit.skyblockaddons.features.backpacks.BackpackColor;
 import codes.biscuit.skyblockaddons.features.backpacks.BackpackInventoryManager;
 import codes.biscuit.skyblockaddons.features.cooldowns.CooldownManager;
@@ -412,6 +409,8 @@ public class PlayerListener {
                             e.message.setChatStyle(oldMessage.getChatStyle());
                         }
                     }
+                } else if (main.getConfigValues().isEnabled(Feature.CRYSTAL_HOLLOWS_CHEST) && unformattedText.contains("You have successfully picked the lock on this chest!")) {
+                    CrystalHollowsChestManager.resetTimeout();
                 }
 
                 if (main.getConfigValues().isEnabled(Feature.NO_ARROWS_LEFT_ALERT)) {
@@ -585,6 +584,10 @@ public class PlayerListener {
                     float newHealth = getAttribute(Attribute.HEALTH) > getAttribute(Attribute.MAX_HEALTH) ?
                             getAttribute(Attribute.HEALTH) : Math.round(getAttribute(Attribute.MAX_HEALTH) * ((p.getHealth()) / p.getMaxHealth()));
                     setAttribute(Attribute.HEALTH, newHealth);
+                }
+
+                if (main.getConfigValues().isEnabled(Feature.CRYSTAL_HOLLOWS_CHEST)) {
+                    CrystalHollowsChestManager.onTick();
                 }
 
                 if (timerTick == 20) {
@@ -1064,12 +1067,14 @@ public class PlayerListener {
             DevUtils.copyData();
         } else if ((rotate = (main.getRotateKey(true).isPressed() ? 1 : 0) - (main.getRotateKey(false).isPressed() ? 1 : 0)) != 0) {
             EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-            float rotation = player.rotationYaw / 45f + rotate;
+            float rotation = (player.rotationYaw + CrystalHollowsChestManager.dYaw) / 45f + rotate;
             if (rotate > 0)
                 rotation = MathHelper.floor_float(rotation) * 45f;
             else
                 rotation = MathHelper.ceiling_float_int(rotation) * 45f;
-            player.rotationYaw = rotation;
+            CrystalHollowsChestManager.dYaw += (rotation - player.rotationYaw);
+        } else if (main.getToggleChestKey().isPressed() && main.getConfigValues().isEnabled(Feature.CRYSTAL_HOLLOWS_CHEST)) {
+            CrystalHollowsChestManager.toggleEnabled();
         }
 
         if (main.getConfigValues().isEnabled(Feature.DUNGEONS_MAP_DISPLAY) &&

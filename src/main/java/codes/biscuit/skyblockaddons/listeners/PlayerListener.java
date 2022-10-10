@@ -590,6 +590,10 @@ public class PlayerListener {
                     CrystalHollowsChestManager.onTick();
                 }
 
+                if (main.getConfigValues().isEnabled(Feature.MITHRIL_HELPER)) {
+                    MithrilManager.onTick();
+                }
+
                 if (timerTick == 20) {
                     // Add natural mana every second (increase is based on your max mana).
                     if (main.getRenderListener().isPredictMana()) {
@@ -1075,6 +1079,8 @@ public class PlayerListener {
             CrystalHollowsChestManager.dYaw += (rotation - player.rotationYaw);
         } else if (main.getToggleChestKey().isPressed() && main.getConfigValues().isEnabled(Feature.CRYSTAL_HOLLOWS_CHEST)) {
             CrystalHollowsChestManager.toggleEnabled();
+        } else if (main.getToggleMithrilKey().isPressed() && main.getConfigValues().isEnabled(Feature.MITHRIL_HELPER)) {
+            MithrilManager.toggleEnabled();
         }
 
         if (main.getConfigValues().isEnabled(Feature.DUNGEONS_MAP_DISPLAY) &&

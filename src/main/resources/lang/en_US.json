@@ -225,7 +225,9 @@
     "hideTrueDefense": "Hide True Defense",
 
     "crystalHollowsChest": "Crystal Hollows Chest Solver",
-    "crystalHollowsChestDebug": "Debug Mode"
+    "crystalHollowsChestDebug": "Debug Mode",
+    "mithrilHelper": "Mithril Helper",
+    "mithrilHelperObsidian": "Include Obsidian"
   },
   "messages": {
     "enchants": "Enchants",
@@ -649,7 +651,8 @@
     "decreaseDungeonMapZoom": "Dungeon Map Zoom Out",
     "rotateLeft": "Rotate Left",
     "rotateRight": "Rotate Right",
-    "toggleChest": "Toggle Chest Solver"
+    "toggleChest": "Toggle Chest Solver",
+    "toggleMithril": "Toggle Mithril Helper"
   },
   "dragonTracker": {
     "protector": "Protector",

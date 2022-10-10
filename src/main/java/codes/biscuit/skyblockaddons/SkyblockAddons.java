@@ -177,7 +177,8 @@ public class SkyblockAddons {
         registerKeyBindings(keyBindings);
         Collections.addAll(customKeyBindings, new SkyblockKeyBinding("rotate_left", Keyboard.KEY_NONE, "keyBindings.rotateLeft"),
                 new SkyblockKeyBinding("rotate_right", Keyboard.KEY_NONE, "keyBindings.rotateRight"),
-                new SkyblockKeyBinding("toggle_chest", Keyboard.KEY_GRAVE, "keyBindings.toggleChest"));
+                new SkyblockKeyBinding("toggle_chest", Keyboard.KEY_GRAVE, "keyBindings.toggleChest"),
+                new SkyblockKeyBinding("toggle_mithril", Keyboard.KEY_NONE, "keyBindings.toggleMithril"));
         registerKeyBindings(customKeyBindings);
 
         setKeyBindingDescriptions();
@@ -253,6 +254,10 @@ public class SkyblockAddons {
 
     public KeyBinding getToggleChestKey() {
         return customKeyBindings.get(2).getKeyBinding();
+    }
+
+    public KeyBinding getToggleMithrilKey() {
+        return customKeyBindings.get(3).getKeyBinding();
     }
 
     /**

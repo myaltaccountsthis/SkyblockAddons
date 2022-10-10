@@ -221,6 +221,7 @@ public class EnumUtils {
         CHANGE_DUNGEON_MAP_ZOOM_WITH_KEYBOARD("settings.changeDungeonMapZoomWithKeyboard", 215),
 
         CRYSTAL_HOLLOWS_CHEST_DEBUG("settings.crystalHollowsChestDebug", 1008),
+        MITHRIL_HELPER_OBSIDIAN("settings.mithrilHelperObsidian", 1014),
 
         DISCORD_RP_STATE(0),
         DISCORD_RP_DETAILS(0),

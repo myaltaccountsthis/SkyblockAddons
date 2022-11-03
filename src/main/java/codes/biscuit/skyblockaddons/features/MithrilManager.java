@@ -18,9 +18,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MithrilManager {
     private static final SkyblockAddons main = SkyblockAddons.getInstance();
@@ -29,10 +31,11 @@ public class MithrilManager {
     private static final int smoothDiorite = BlockStone.EnumType.DIORITE_SMOOTH.getMetadata();
     private static final int obsidian = Blocks.obsidian.getMetaFromState(Blocks.obsidian.getDefaultState());
     private static final BlockPos scanRange = new BlockPos(5, 5, 5);
-    private static final Set<BlockPos> blockPositions = new HashSet<>();
+    private static final LinkedHashSet<BlockPos> blockPositions = new LinkedHashSet<>();
     private static final EnumFacing[] axes = {EnumFacing.EAST, EnumFacing.WEST, EnumFacing.UP, EnumFacing.DOWN, EnumFacing.SOUTH, EnumFacing.NORTH};
     private static final int defaultTimeout = 5;
-    private static Vec3 recentLookAt = null;
+    private static BlockPos prevBlockPos = null;
+    private static Vec3 prevPos = null;
 
     private static int timeout = 0;
     private static boolean enabled = false;
@@ -57,41 +60,59 @@ public class MithrilManager {
         EntityPlayer player = mc.thePlayer;
         if (world == null || player == null)
             return;
-        if (enabled && !blockPositions.isEmpty()) {
-            for (BlockPos pos : blockPositions) {
-                if (!isWool(world, pos) && !isTitanium(world, pos)) {
-                    timeout = 0;
-                }
-                break;
-            }
-        }
+
         if (timeout == 0) {
             if (enabled) {
                 // switch targets
-                timeout = defaultTimeout;
-                blockPositions.removeIf(pos -> !isInRange(player, getClosestPos(world, player, pos)) || !isWool(world, pos) && !isTitanium(world, pos));
+                blockPositions.removeIf(pos -> !isInRange(player, getClosestPos(world, player, pos)) || !validBlock(pos));
                 //if (blockPositions.isEmpty()) {
                     scanBlocks();
                 //}
                 if (!blockPositions.isEmpty()) {
-                    // just get the first element
+                    // --just get the first element--
+                    // find the closest one to the previous
+                    if (prevPos == null)
+                        prevPos = player.getPositionVector();
+                    Vec3 closest = prevPos;
+                    BlockPos closestBlockPos = prevBlockPos;
+                    double distance = Double.MAX_VALUE;
                     for (BlockPos pos : blockPositions) {
-                        lookAt(player, recentLookAt = getClosestPos(world, player, pos));
-                        return;
+                        Vec3 vec = getClosestPos(world, player, pos);
+                        double dist = vec.squareDistanceTo(prevPos) + .02 * (Math.random() - .3) * vec.squareDistanceTo(player.getPositionVector());
+                        if (dist < distance) {
+                            closest = vec;
+                            closestBlockPos = pos;
+                            distance = dist;
+                        }
+                    }
+                    if (closest != player.getPositionVector()) {
+                        timeout = defaultTimeout;
+                        lookAt(player, closest);
+                        prevPos = closest;
+                        prevBlockPos = closestBlockPos;
                     }
                 }
             }
-            recentLookAt = null;
+
         }
         else {
-            //lookAt(player, recentLookAt);
             timeout--;
+            if (!validBlock(prevBlockPos))
+                timeout = 0;
         }
     }
 
     public static void lookAt(EntityPlayer player, Vec3 pos) {
         if (pos != null)
             CrystalHollowsChestManager.lookAt(player, pos);
+    }
+
+    public static boolean validBlock(BlockPos pos) {
+        World world = mc.theWorld;
+        EntityPlayer player = mc.thePlayer;
+        if (player == null || world == null)
+            return false;
+        return (isWool(world, pos) || isTitanium(world, pos) || isObsidian(world, pos) && main.getConfigValues().isEnabled(Feature.MITHRIL_HELPER_OBSIDIAN));
     }
 
     public static void scanBlocks() {

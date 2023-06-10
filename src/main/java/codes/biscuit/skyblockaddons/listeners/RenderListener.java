@@ -990,6 +990,8 @@ public class RenderListener {
             } else {
                 text = ""; // If it has made fetchur, then no need for text
             }
+        } else if (feature == Feature.BLOCKS_PER_SECOND) {
+            text = "Blocks per second: " + main.getPlayerListener().getNumBlocksBroken();
         } else {
             return;
         }

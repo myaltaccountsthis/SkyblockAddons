@@ -217,6 +217,8 @@ public enum Feature {
     CRIMSON_ARMOR_ABILITY_STACKS(217, "settings.crimsonArmorAbilityStacks", new GuiFeatureData(EnumUtils.DrawType.TEXT, ColorCode.GOLD), false),
     HIDE_TRUE_DEFENSE(218, "settings.hideTrueDefense", new GuiFeatureData(ColorCode.RED), false),
 
+    BLOCKS_PER_SECOND(1005, "settings.blocksPerSecond", new GuiFeatureData(EnumUtils.DrawType.TEXT, ColorCode.WHITE), true, EnumUtils.FeatureSetting.BLOCKS_PER_SECOND_CROPS_ONLY),
+    BLOCKS_PER_SECOND_CROPS_ONLY(1006, "settings.blocksPerSecondCropsOnly", false),
     CRYSTAL_HOLLOWS_CHEST(1007, "settings.crystalHollowsChest", null, true, EnumUtils.FeatureSetting.CRYSTAL_HOLLOWS_CHEST_DEBUG),
     CRYSTAL_HOLLOWS_CHEST_DEBUG(1008, "settings.crystalHollowsChestDebug", true),
     MITHRIL_HELPER(1010, "settings.mithrilHelper", null, true, EnumUtils.FeatureSetting.MITHRIL_HELPER_OBSIDIAN),
@@ -281,7 +283,7 @@ public enum Feature {
             DUNGEONS_COLLECTED_ESSENCES_DISPLAY, REVENANT_SLAYER_TRACKER, TARANTULA_SLAYER_TRACKER, SVEN_SLAYER_TRACKER, DRAGON_STATS_TRACKER, DUNGEON_DEATH_COUNTER,
             ROCK_PET_TRACKER, DOLPHIN_PET_TRACKER, DUNGEONS_SECRETS_DISPLAY, CANDY_POINTS_COUNTER, DRILL_FUEL_TEXT,
             TREVOR_TRACKED_ENTITY_PROXIMITY_INDICATOR, FETCHUR_TODAY, VOIDGLOOM_SLAYER_TRACKER, OTHER_DEFENCE_STATS, SPIRIT_SCEPTRE_DISPLAY, FARM_EVENT_TIMER,
-            CRIMSON_ARMOR_ABILITY_STACKS, HIDE_TRUE_DEFENSE));
+            CRIMSON_ARMOR_ABILITY_STACKS, HIDE_TRUE_DEFENSE, BLOCKS_PER_SECOND));
 
     /**
      * These are features that are displayed separate, on the general tab.

@@ -220,6 +220,7 @@ public class EnumUtils {
         RESET_SALVAGED_ESSENCES_AFTER_LEAVING_MENU("settings.resetSalvagedEssencesAfterLeavingMenu", 214),
         CHANGE_DUNGEON_MAP_ZOOM_WITH_KEYBOARD("settings.changeDungeonMapZoomWithKeyboard", 215),
 
+        BLOCKS_PER_SECOND_CROPS_ONLY("settings.blocksPerSecondCropsOnly", 1006),
         CRYSTAL_HOLLOWS_CHEST_DEBUG("settings.crystalHollowsChestDebug", 1008),
         MITHRIL_HELPER_OBSIDIAN("settings.mithrilHelperObsidian", 1014),
 

@@ -34,6 +34,7 @@ import lombok.Setter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.block.BlockStone;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -163,6 +164,8 @@ public class PlayerListener {
 
     @Getter private int spiritSceptreHitEnemies = 0;
     @Getter private float spiritSceptreDealtDamage = 0;
+
+    private final ArrayList<Integer> blocksBroken = new ArrayList<>();
 
     @Getter
     private final TreeMap<Long, Vec3> explosiveBowExplosions = new TreeMap<>();
@@ -585,6 +588,9 @@ public class PlayerListener {
                             getAttribute(Attribute.HEALTH) : Math.round(getAttribute(Attribute.MAX_HEALTH) * ((p.getHealth()) / p.getMaxHealth()));
                     setAttribute(Attribute.HEALTH, newHealth);
                 }
+
+                blocksBroken.replaceAll(i -> i - 1);
+                blocksBroken.removeIf(i -> i <= 0);
 
                 if (main.getConfigValues().isEnabled(Feature.CRYSTAL_HOLLOWS_CHEST)) {
                     CrystalHollowsChestManager.onTick();
@@ -1240,6 +1246,11 @@ public class PlayerListener {
                 }
             }
         }
+        if (main.getConfigValues().isEnabled(Feature.BLOCKS_PER_SECOND)) {
+            if (blockState.getBlock() instanceof IGrowable || main.getConfigValues().isDisabled(Feature.BLOCKS_PER_SECOND_CROPS_ONLY)) {
+                blocksBroken.add(20);
+            }
+        }
     }
 
     public boolean aboutToJoinSkyblockServer() {
@@ -1325,5 +1336,9 @@ public class PlayerListener {
 
     public ActionBarParser getActionBarParser() {
         return actionBarParser;
+    }
+
+    public int getNumBlocksBroken() {
+        return blocksBroken.size();
     }
 }

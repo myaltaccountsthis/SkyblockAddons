@@ -79,7 +79,7 @@ public class MithrilManager {
                     for (BlockPos pos : blockPositions) {
                         Vec3 vec = getClosestPos(world, player, pos);
                         double dist = vec.squareDistanceTo(prevPos) + .02 * (Math.random() - .3) * vec.squareDistanceTo(player.getPositionVector());
-                        if (dist < distance) {
+                        if (dist < distance && (!pos.equals(player.getPosition().add(0, -1, 0)) || blockPositions.size() == 1)) {
                             closest = vec;
                             closestBlockPos = pos;
                             distance = dist;
@@ -112,7 +112,7 @@ public class MithrilManager {
         EntityPlayer player = mc.thePlayer;
         if (player == null || world == null)
             return false;
-        return (isWool(world, pos) || isTitanium(world, pos) || isObsidian(world, pos) && main.getConfigValues().isEnabled(Feature.MITHRIL_HELPER_OBSIDIAN));
+        return (isWool(world, pos) || isTitanium(world, pos) || main.getConfigValues().isEnabled(Feature.MITHRIL_HELPER_OBSIDIAN) && isObsidian(world, pos) || main.getConfigValues().isEnabled(Feature.MITHRIL_HELPER_GEMSTONE) && isGemstone(world, pos));
     }
 
     public static void scanBlocks() {
@@ -123,7 +123,7 @@ public class MithrilManager {
         BlockPos start = player.getPosition().subtract(scanRange);
         BlockPos end = player.getPosition().add(scanRange);
         for (BlockPos pos : BlockPos.getAllInBox(start, end)) {
-            if (pos.getY() >= 0 && pos.getY() < 256 && (isWool(world, pos) || isTitanium(world, pos) || isObsidian(world, pos) && main.getConfigValues().isEnabled(Feature.MITHRIL_HELPER_OBSIDIAN))) {
+            if (pos.getY() >= 0 && pos.getY() < 256 && validBlock(pos)) {
                 Vec3 closestPos = getClosestPos(world, player, pos);
                 if (closestPos.lengthVector() > 0.1 && isInRange(player, closestPos)) {
                     blockPositions.add(pos);
@@ -145,6 +145,11 @@ public class MithrilManager {
 
     private static boolean isObsidian(World world, BlockPos pos) {
         return Block.isEqualTo(world.getBlockState(pos).getBlock(), Blocks.obsidian);
+    }
+
+    private static boolean isGemstone(World world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos);
+        return Block.isEqualTo(state.getBlock(), Blocks.stained_glass) || Block.isEqualTo(state.getBlock(), Blocks.stained_glass_pane);
     }
 
     /**

@@ -18,6 +18,8 @@ public class CrystalHollowsChestManager {
     private static final int defaultChestSamePositionTimeout = 5;
     private static final int defaultChestSameBlockPosTimeout = 100; // this should last all 5, when chat message "You have successfully picked the lock on this chest!"
 
+    public static final float rotationIncrement = 30f;
+
     private static int chestSamePositionTimeout = 0;
     private static int chestSameBlockPosTimeout = 0;
     private static Vec3 chestPrevPosition = new Vec3(0, 0, 0);
@@ -114,26 +116,25 @@ public class CrystalHollowsChestManager {
         //player.rotationPitch = pitch;
     }
 
-    private static final float turnMultiplier = 5f;
+    private static final float turnMultiplier = 4f;
 
     public static void updateRotation() {
         if (dYaw == 0f && dPitch == 0f) return;
 
         EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 
-        while (dYaw < -180f)
-            dYaw += 360f;
-        while (dYaw > 180f)
-            dYaw -= 360f;
+        dYaw = MathHelper.wrapAngleTo180_float(dYaw);
 
         float yaw = player.rotationYaw;
         float toRotateYaw = dYaw / turnMultiplier;
         if (toRotateYaw < 0) toRotateYaw--; else toRotateYaw++;
-        if (Math.abs(toRotateYaw) > Math.abs(dYaw)) {
+        if (Math.abs(toRotateYaw) >= Math.abs(dYaw)) {
             toRotateYaw = dYaw;
         }
         yaw += toRotateYaw;
         dYaw -= toRotateYaw;
+        if (MathHelper.epsilonEquals(dYaw, 0f))
+            dYaw = 0f;
 
         while (dPitch < -180f)
             dPitch += 360f;

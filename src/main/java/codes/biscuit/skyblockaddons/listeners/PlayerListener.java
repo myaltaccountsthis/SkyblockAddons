@@ -1075,13 +1075,15 @@ public class PlayerListener {
 
         } else if (main.getConfigValues().isEnabled(Feature.DEVELOPER_MODE) && main.getDeveloperCopyNBTKey().isPressed()) {
             DevUtils.copyData();
-        } else if ((rotate = (main.getRotateKey(true).isPressed() ? 1 : 0) - (main.getRotateKey(false).isPressed() ? 1 : 0)) != 0) {
+        } else if (main.getConfigValues().isEnabled(Feature.ROTATE_KEYS) && (rotate = (main.getRotateKey(true).isPressed() ? 1 : 0) - (main.getRotateKey(false).isPressed() ? 1 : 0)) != 0) {
             EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-            float rotation = (player.rotationYaw + CrystalHollowsChestManager.dYaw) / 45f + rotate;
+            float rot = player.rotationYaw + CrystalHollowsChestManager.dYaw;
+            float offset = main.getConfigValues().isEnabled(Feature.ROTATE_KEYS_SUGARCANE) ? 10f : 0f;
+            float rotation = Math.round(rot - offset) / CrystalHollowsChestManager.rotationIncrement + rotate;
             if (rotate > 0)
-                rotation = MathHelper.floor_float(rotation) * 45f;
+                rotation = MathHelper.floor_float(rotation) * CrystalHollowsChestManager.rotationIncrement + offset;
             else
-                rotation = MathHelper.ceiling_float_int(rotation) * 45f;
+                rotation = MathHelper.ceiling_float_int(rotation) * CrystalHollowsChestManager.rotationIncrement + offset;
             CrystalHollowsChestManager.dYaw += (rotation - player.rotationYaw);
         } else if (main.getToggleChestKey().isPressed() && main.getConfigValues().isEnabled(Feature.CRYSTAL_HOLLOWS_CHEST)) {
             CrystalHollowsChestManager.toggleEnabled();

@@ -224,10 +224,15 @@
     "crimsonArmorAbilityStacks": "Show Crimson Armor Stacks",
     "hideTrueDefense": "Hide True Defense",
 
+    "blocksPerSecond": "Show Blocks Per Second",
+    "blocksPerSecondCropsOnly": "Crops Only",
     "crystalHollowsChest": "Crystal Hollows Chest Solver",
     "crystalHollowsChestDebug": "Debug Mode",
     "mithrilHelper": "Mithril Helper",
-    "mithrilHelperObsidian": "Include Obsidian"
+    "mithrilHelperObsidian": "Include Obsidian",
+    "mithrilHelperGemstone": "Include Gemstones",
+    "rotateKeys": "Rotate Keys",
+    "rotateKeysSugarcane": "Sugarcane Offset"
   },
   "messages": {
     "enchants": "Enchants",

@@ -223,6 +223,8 @@ public class EnumUtils {
         BLOCKS_PER_SECOND_CROPS_ONLY("settings.blocksPerSecondCropsOnly", 1006),
         CRYSTAL_HOLLOWS_CHEST_DEBUG("settings.crystalHollowsChestDebug", 1008),
         MITHRIL_HELPER_OBSIDIAN("settings.mithrilHelperObsidian", 1014),
+        MITHRIL_HELPER_GEMSTONE("settings.mithrilHelperGemstone", 1015),
+        ROTATE_KEYS_SUGARCANE("settings.rotateKeysSugarcane", 1021),
 
         DISCORD_RP_STATE(0),
         DISCORD_RP_DETAILS(0),

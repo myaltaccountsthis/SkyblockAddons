@@ -121,7 +121,8 @@ public class DataUtils {
         }
         connectionManager.setMaxTotal(5);
         connectionManager.setDefaultMaxPerRoute(5);
-        registerRemoteRequests();
+        // Disable online fetching due to EOL
+        // registerRemoteRequests();
     }
 
     //TODO: Migrate all data file loading to this class
@@ -258,7 +259,7 @@ public class DataUtils {
             if (!request.isDone()) {
                 handleOnlineFileLoadException(request,
                         new RuntimeException(String.format("Request for \"%s\" didn't finish in time for mod init.",
-                                getFileNameFromUrlString(request.getUrl()))));
+                                getFileNameFromUrlString(request.getURL()))));
             }
 
             try {
@@ -368,7 +369,7 @@ public class DataUtils {
             StringBuilder errorMessageBuilder = new StringBuilder("Failed Requests:\n");
 
             for (Map.Entry<RemoteFileRequest<?>, Throwable> failedRequest : failedRequests.entrySet()) {
-                errorMessageBuilder.append(failedRequest.getKey().getUrl()).append("\n");
+                errorMessageBuilder.append(failedRequest.getKey().getURL()).append("\n");
                 errorMessageBuilder.append(failedRequest.getValue().toString()).append("\n");
             }
 
@@ -406,9 +407,9 @@ public class DataUtils {
 
     private static void registerRemoteRequests() {
         remoteRequests.add(new OnlineDataRequest());
-        if (SkyblockAddons.getInstance().getConfigValues().getLanguage() != Language.ENGLISH) {
+/*        if (SkyblockAddons.getInstance().getConfigValues().getLanguage() != Language.ENGLISH) {
             remoteRequests.add(new LocalizedStringsRequest(SkyblockAddons.getInstance().getConfigValues().getLanguage()));
-        }
+        }*/
         remoteRequests.add(new EnchantedItemListsRequest());
         remoteRequests.add(new ContainersRequest());
         remoteRequests.add(new CompactorItemsRequest());
@@ -449,7 +450,7 @@ public class DataUtils {
      * @param exception the exception that occurred
      */
     private static void handleOnlineFileLoadException(RemoteFileRequest<?> request, Throwable exception) {
-        String url = request.getUrl();
+        String url = request.getURL();
         String fileName = getFileNameFromUrlString(url);
         failedRequests.put(request, exception);
 

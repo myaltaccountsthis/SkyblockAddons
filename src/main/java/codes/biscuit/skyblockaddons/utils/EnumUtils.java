@@ -157,7 +157,7 @@ public class EnumUtils {
         ENABLED_IN_OTHER_GAMES("settings.showInOtherGames", -1),
         REPEATING("settings.repeating", -1),
         TEXT_MODE("settings.textMode", -1),
-        DRAGONS_NEST_ONLY("settings.dragonsNestOnly", -1),
+        DRAGONS_NEST_ONLY("settings.dragonsNestOnly", 128),
         USE_VANILLA_TEXTURE("settings.useVanillaTexture", 17),
         BACKPACK_STYLE("settings.backpackStyle", -1),
         SHOW_ONLY_WHEN_HOLDING_SHIFT("settings.showOnlyWhenHoldingShift", 18),
@@ -165,13 +165,7 @@ public class EnumUtils {
         POWER_ORB_DISPLAY_STYLE("settings.powerOrbDisplayStyle", -1),
         CHANGE_BAR_COLOR_WITH_POTIONS("settings.changeBarColorForPotions", 46),
         ENABLE_MESSAGE_WHEN_ACTION_PREVENTED("settings.enableMessageWhenActionPrevented", -1),
-        // Obsolete
-        @Deprecated
-        HIDE_NIGHT_VISION_EFFECT("settings.hideNightVisionEffectTimer", 70),
         ENABLE_CAKE_BAG_PREVIEW("settings.showCakeBagPreview", 71),
-        // Obsolete
-        @Deprecated
-        SORT_TAB_EFFECT_TIMERS("settings.sortTabEffectTimers", 74),
         ROTATE_MAP("settings.rotateMap", 100),
         CENTER_ROTATION_ON_PLAYER("settings.centerRotationOnYourPlayer", 101),
         MAP_ZOOM("settings.mapZoom", -1),
@@ -219,6 +213,9 @@ public class EnumUtils {
         DONT_REPLACE_ROMAN_NUMERALS_IN_ITEM_NAME("settings.dontReplaceRomanNumeralsInItemNames", 210),
         RESET_SALVAGED_ESSENCES_AFTER_LEAVING_MENU("settings.resetSalvagedEssencesAfterLeavingMenu", 214),
         CHANGE_DUNGEON_MAP_ZOOM_WITH_KEYBOARD("settings.changeDungeonMapZoomWithKeyboard", 215),
+        SHOW_PROFILE_TYPE( "settings.showProfileType", 219),
+        SHOW_NETHER_FACTION("settings.showNetherFaction", 220),
+        ZEALOT_SPAWN_AREAS_ONLY("settings.zealotSpawnAreasOnly", -1),
 
         BLOCKS_PER_SECOND_CROPS_ONLY("settings.blocksPerSecondCropsOnly", 1006),
         CRYSTAL_HOLLOWS_CHEST_DEBUG("settings.crystalHollowsChestDebug", 1008),
@@ -414,7 +411,8 @@ public class EnumUtils {
         REVENANT_HORROR("Revenant Horror"),
         TARANTULA_BROODFATHER("Tarantula Broodfather"),
         SVEN_PACKMASTER("Sven Packmaster"),
-        VOIDGLOOM_SERAPH("Voidgloom Seraph");
+        VOIDGLOOM_SERAPH("Voidgloom Seraph"),
+        INFERNO_DEMONLORD("Inferno Demonlord");
 
         private final String scoreboardName;
 

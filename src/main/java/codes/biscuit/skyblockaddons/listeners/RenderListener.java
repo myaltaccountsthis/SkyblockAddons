@@ -79,7 +79,6 @@ public class RenderListener {
     private static final ItemStack BONE_ITEM = new ItemStack(Items.bone);
     private static final ResourceLocation BARS = new ResourceLocation("skyblockaddons", "barsV2.png");
     private static final ResourceLocation DEFENCE_VANILLA = new ResourceLocation("skyblockaddons", "defence.png");
-    private static final ResourceLocation IMPERIAL_BARS_FIX = new ResourceLocation("skyblockaddons", "imperialbarsfix.png");
     private static final ResourceLocation TICKER_SYMBOL = new ResourceLocation("skyblockaddons", "ticker.png");
 
     private static final ResourceLocation ENDERMAN_ICON = new ResourceLocation("skyblockaddons", "icons/enderman.png");
@@ -829,13 +828,15 @@ public class RenderListener {
             }
 
         } else if (feature == Feature.ZEALOT_COUNTER) {
-            if (main.getConfigValues().isEnabled(Feature.ZEALOT_COUNTER_NEST_ONLY) && main.getUtils().getLocation() != Location.DRAGONS_NEST && buttonLocation == null) {
+            if (main.getConfigValues().isEnabled(Feature.ZEALOT_COUNTER_ZEALOT_SPAWN_AREAS_ONLY) &&
+                    !LocationUtils.isZealotSpawnLocation(main.getUtils().getLocation().getScoreboardName()) && buttonLocation == null) {
                 return;
             }
             text = String.valueOf(main.getPersistentValuesManager().getPersistentValues().getKills());
 
         } else if (feature == Feature.SHOW_TOTAL_ZEALOT_COUNT) {
-            if (main.getConfigValues().isEnabled(Feature.SHOW_TOTAL_ZEALOT_COUNT_NEST_ONLY) && main.getUtils().getLocation() != Location.DRAGONS_NEST && buttonLocation == null) {
+            if (main.getConfigValues().isEnabled(Feature.SHOW_TOTAL_ZEALOT_COUNT_ZEALOT_SPAWN_AREAS_ONLY) &&
+                    !LocationUtils.isZealotSpawnLocation(main.getUtils().getLocation().getScoreboardName()) && buttonLocation == null) {
                 return;
             }
             if (main.getPersistentValuesManager().getPersistentValues().getTotalKills() <= 0) {
@@ -845,13 +846,15 @@ public class RenderListener {
             }
 
         } else if (feature == Feature.SHOW_SUMMONING_EYE_COUNT) {
-            if (main.getConfigValues().isEnabled(Feature.SHOW_SUMMONING_EYE_COUNT_NEST_ONLY) && main.getUtils().getLocation() != Location.DRAGONS_NEST && buttonLocation == null) {
+            if (main.getConfigValues().isEnabled(Feature.SHOW_SUMMONING_EYE_COUNT_ZEALOT_SPAWN_AREAS_ONLY) &&
+                    !LocationUtils.isZealotSpawnLocation(main.getUtils().getLocation().getScoreboardName()) && buttonLocation == null) {
                 return;
             }
             text = String.valueOf(main.getPersistentValuesManager().getPersistentValues().getSummoningEyeCount());
 
         } else if (feature == Feature.SHOW_AVERAGE_ZEALOTS_PER_EYE) {
-            if (main.getConfigValues().isEnabled(Feature.SHOW_AVERAGE_ZEALOTS_PER_EYE_NEST_ONLY) && main.getUtils().getLocation() != Location.DRAGONS_NEST && buttonLocation == null) {
+            if (main.getConfigValues().isEnabled(Feature.SHOW_AVERAGE_ZEALOTS_PER_EYE_ZEALOT_SPAWN_AREAS_ONLY) &&
+                    !LocationUtils.isZealotSpawnLocation(main.getUtils().getLocation().getScoreboardName()) && buttonLocation == null) {
                 return;
             }
             int summoningEyeCount = main.getPersistentValuesManager().getPersistentValues().getSummoningEyeCount();
